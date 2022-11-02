@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Main from './Components/Main';
+import Loading from './Components/Loading';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loadWeather } from './redux/slice';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadWeather());
+  }, []);
+  const { weatherFromStore, isLoading, error } = useSelector(
+    (state) => state.weather
   );
+  console.log(weatherFromStore, isLoading);
+
+  if (isLoading) {
+    return <Loading />;
+  } else {
+    return (
+      <>
+        <div className="all">
+          {error && <h2>Error occured: {error}</h2>}
+
+          <div className="left">
+            <Main weatherFromStore={weatherFromStore} />
+          </div>
+
+          <div className="double">
+            <div className="up"></div>
+            <div className="down"></div>
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;
