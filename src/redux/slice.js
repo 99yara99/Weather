@@ -13,8 +13,8 @@ export let loadWeather = createAsyncThunk(
     const myAPIKey = 'c672f02723facd37006c42e83485322d';
     const celsius = 'metric';
     const KyivCoordinates = {
-      lat: 50.4500336,
-      lon: 30.5241361,
+      lat: 50.4333,
+      lon: 30.5167,
     };
 
     try {
@@ -61,8 +61,5 @@ const weatherSlice = createSlice({
     },
   },
 });
-
-// export const { weatherLoadStart, weatherLoadSuccess, weatherLoadError } =
-//   weatherSlice.actions;
 
 export default weatherSlice.reducer;
