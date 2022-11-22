@@ -3,22 +3,18 @@
   display: flex;
 }
 
-.Main {
-  width: 30%;
-  height: 750px;
-  /* border: 2px solid blue; */
-}
-
 .double {
   width: 70%;
   height: 750px;
   flex-wrap: wrap;
+  background-color: #e1f4cb;
 
   /* border: 2px solid green; */
 }
 
-.up {
+.ForecastWeek {
   height: 200px;
+  display: flex;
   /* border: 2px solid yellow; */
 }
 
@@ -32,11 +28,21 @@
 .TodaysHighlights {
   width: 70%;
   display: flex;
-
   border: 2px solid black;
 }
 
-.Map {
+/* .Map {
   width: 30%;
+  height: 545px;
+  border: 2px solid rebeccapurple;
+} */
+.leaflet-container {
+  width: 100%;
+  height: 545px;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
   border: 2px solid red;
 }

@@ -18,7 +18,7 @@ export let loadWeather = createAsyncThunk(
     };
 
     try {
-      const response = await axios.get(
+      const responseCurrent = await axios.get(
         'https://api.openweathermap.org/data/2.5/weather',
         {
           params: {
@@ -30,11 +30,27 @@ export let loadWeather = createAsyncThunk(
         }
       );
 
-      if (response.statusText !== 'OK') {
+      const responseForecast = await axios.get(
+        'https://api.openweathermap.org/data/2.5/forecast?',
+        {
+          params: {
+            lat: KyivCoordinates.lat,
+            lon: KyivCoordinates.lon,
+            appid: myAPIKey,
+            units: celsius,
+            cnt: 7,
+          },
+        }
+      );
+
+      if (responseForecast.statusText !== 'OK') {
         throw new Error('Server error');
       }
 
-      return response.data;
+      return {
+        currentWeather: responseCurrent.data,
+        forecastWeather: responseForecast.data,
+      };
     } catch (error) {
       return rejectWithValue(error.message);
     }

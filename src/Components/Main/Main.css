@@ -1,0 +1,33 @@
+.Main {
+  /* background-color: #e1f4cb; */
+  width: 30%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  /* border: 2px solid blue; */
+}
+
+.searchBar {
+  margin-top: 5vh;
+  margin-left: 3vw;
+}
+
+.searchBar input[type='text'] {
+  /* width: 175px; */
+  background-color: #e1f4cb;
+  border-radius: 15px;
+  border: 2px solid blue;
+  border: none;
+  font-size: 17px;
+}
+
+.mainImg img {
+  display: flex;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  padding: 75px;
+}
