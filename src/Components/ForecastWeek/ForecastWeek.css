@@ -1,0 +1,80 @@
+.forecastWeek {
+  width: 100%;
+  height: 45%;
+  margin-left: 12px;
+  margin-right: 25px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.forecastDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+  width: 90px;
+  height: 120px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px 5px #b8bdb5;
+  clip-path: inset(-15px -15px -15px -15px);
+}
+
+.imageIcon img {
+  width: 40px;
+  height: 40px;
+}
+
+.forecastTitle {
+  /* float: left; */
+  margin-top: 40px;
+}
+
+.tempIcon {
+  float: right;
+}
+
+.forecastTitle span {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.celsius {
+  display: inline-block;
+  background-color: black;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  margin-left: 10px;
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.celsius:focus {
+  display: inline-block;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  color: black;
+  margin-left: 10px;
+  padding: 6px 8px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.forecastTempText {
+  display: flex;
+}
+
+.forecastTempText p {
+  float: left;
+}
+
+.forecastTempText p:last-child {
+  color: #b8bdb5;
+  margin-left: 5px;
+}

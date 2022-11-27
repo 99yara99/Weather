@@ -1,36 +1,130 @@
 import './Main.css';
-import moment from 'moment/moment';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import brokenClouds from '../icons/scatteredCloudsBrokenClouds.png';
-import fewClouds from '../icons/fewClouds.png';
+import moment from 'moment/moment';
+import clearSky from '../icons/clearSky01d.png';
+import fewCloudsScatteredClouds from '../icons/fewCloudsScatteredClouds02d.png';
+import overcastCloudsBrokenClouds from '../icons/overcastCloudsBrokenClouds04d.png';
+import showerRain from '../icons/showerRain09d.png';
+import rain from '../icons/rain10d.png';
+import thunderstorm from '../icons/thunderstorm11d.png';
+import snow from '../icons/snow13d.png';
+import mist from '../icons/mist50d.png';
+import search from '../icons/search.png';
 
-const Main = () => {
+const Main = (isCelsius) => {
   const { weatherFromAPI } = useSelector((state) => state.weather);
-
-  console.log(JSON.parse(JSON.stringify(weatherFromAPI)));
+  console.log(weatherFromAPI);
+  const Image = () => {
+    return (
+      <>
+        <div>
+          {['01d', '01n'].includes(
+            weatherFromAPI?.currentWeather.weather[0].icon
+          ) ? (
+            <img src={clearSky} alt="Clear Sky" />
+          ) : ['02d', '02n', '03d', '03n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img
+              src={fewCloudsScatteredClouds}
+              alt="Few Clouds or Scattered Clouds"
+            />
+          ) : ['04d', '04n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img
+              src={overcastCloudsBrokenClouds}
+              alt="Overcast Clouds or Broken Clouds"
+            />
+          ) : ['09d', '09n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img src={showerRain} alt="Shower Rain" />
+          ) : ['10d', '10n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img src={rain} alt="Rain" />
+          ) : ['13d', '13n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img src={snow} alt="Snow" />
+          ) : ['50d', '50n'].includes(
+              weatherFromAPI?.currentWeather.weather[0].icon
+            ) ? (
+            <img src={thunderstorm} alt="Thunderstorm" />
+          ) : (
+            <img src={mist} alt="Mist" />
+          )}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
       <div className="searchBar">
-        <input type="text" placeholder="search for places..." />
+        <img src={search} alt="Search Icon" />
+        <input
+          type="text"
+          placeholder="search for places..."
+          //         value={searchText}
+          //         onChange={handleChange}
+          //         onSubmit={useEffect(() => {
+          //   dispatch(
+          //     loadWeather({
+          //       coord: {
+          //         lat: 50.4333,
+          //         lon: 30.5167,
+          //       },
+          //       unitTemp: 'metric',
+          //     })
+          //   );
+          // }, [dispatch])}
+        />
       </div>
       <div className="mainImg">
-        <img src={brokenClouds} alt="Broken Clouds" />
+        <Image />
       </div>
-      <div>
-        <p>{`${Math.trunc(weatherFromAPI?.currentWeather.main.temp)} ℃`}</p>
-        <p>
-          {weatherFromAPI?.currentWeather.name},
-          {weatherFromAPI?.currentWeather.sys.country}
-        </p>
-        <p>{`${moment()
-          .utcOffset(weatherFromAPI?.currentWeather.timezone / 60)
-          .format('dddd, HH:mm')}`}</p>
-        <div>
-          <img src={fewClouds} alt="Cinque Terre" width={25} height={25} />
+      <div className="mainText">
+        {isCelsius.isCelsius === 'metric' ? (
+          <div className="tempText">
+            <p>
+              {Math.trunc(weatherFromAPI?.currentWeather.main.temp)}
+              °C
+            </p>
+          </div>
+        ) : (
+          <div className="tempText">
+            <p>
+              {Math.trunc(weatherFromAPI?.currentWeather.main.temp * 1.8 + 32)}
+              °F
+            </p>
+          </div>
+        )}
+
+        <div className="countryText">
+          <p>
+            {weatherFromAPI?.currentWeather.name},
+            {weatherFromAPI?.currentWeather.sys.country}
+          </p>
         </div>
-        <p>{`Clouds - ${weatherFromAPI?.currentWeather.clouds.all}`}%</p>
-        <p>{weatherFromAPI?.currentWeather.weather[0].description}</p>
+        <div className="dateText">
+          <p>{`${moment()
+            .utcOffset(weatherFromAPI?.currentWeather.timezone / 60)
+            .format('dddd, HH:mm')}`}</p>
+        </div>
+
+        <hr></hr>
+        <div className="cloudContainer">
+          <div className="cloudIcon">
+            <Image />
+          </div>
+          <div className="cloudInfo">
+            <p>{`Clouds - ${weatherFromAPI?.currentWeather.clouds.all}`}%</p>
+            <p>{weatherFromAPI?.currentWeather.weather[0].description}</p>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -9,23 +9,18 @@ let initialState = {
 
 export let loadWeather = createAsyncThunk(
   'weather/loadWeather',
-  async (_, { rejectWithValue }) => {
+  async ({ coord, unitTemp }, { rejectWithValue }) => {
     const myAPIKey = 'c672f02723facd37006c42e83485322d';
-    const celsius = 'metric';
-    const KyivCoordinates = {
-      lat: 50.4333,
-      lon: 30.5167,
-    };
 
     try {
       const responseCurrent = await axios.get(
         'https://api.openweathermap.org/data/2.5/weather',
         {
           params: {
-            lat: KyivCoordinates.lat,
-            lon: KyivCoordinates.lon,
+            lat: coord.lat,
+            lon: coord.lon,
             appid: myAPIKey,
-            units: celsius,
+            units: unitTemp,
           },
         }
       );
@@ -34,16 +29,20 @@ export let loadWeather = createAsyncThunk(
         'https://api.openweathermap.org/data/2.5/forecast?',
         {
           params: {
-            lat: KyivCoordinates.lat,
-            lon: KyivCoordinates.lon,
+            lat: coord.lat,
+            lon: coord.lon,
             appid: myAPIKey,
-            units: celsius,
+            units: unitTemp,
             cnt: 7,
           },
         }
       );
 
       if (responseForecast.statusText !== 'OK') {
+        throw new Error('Server error');
+      }
+
+      if (responseCurrent.statusText !== 'OK') {
         throw new Error('Server error');
       }
 
