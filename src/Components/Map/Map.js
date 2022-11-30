@@ -1,9 +1,14 @@
 import './Map.css';
 import { MapContainer, TileLayer } from 'react-leaflet';
+import { useContext } from 'react';
+import { CoordContext } from '../Main/SearchBar/CoordContext';
 
 const MyMap = () => {
-  const position = [50.4333, 30.5167];
+  // Getting data from Context
+  let { coordsContext } = useContext(CoordContext);
+  const position = [coordsContext.lat, coordsContext.lon];
 
+  //Rendering Map Component
   return (
     <MapContainer center={position} zoom={12} scrollWheelZoom={true}>
       <TileLayer

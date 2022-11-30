@@ -2,19 +2,22 @@ import './Main.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import moment from 'moment/moment';
-import clearSky from '../icons/clearSky01d.png';
-import fewCloudsScatteredClouds from '../icons/fewCloudsScatteredClouds02d.png';
-import overcastCloudsBrokenClouds from '../icons/overcastCloudsBrokenClouds04d.png';
-import showerRain from '../icons/showerRain09d.png';
-import rain from '../icons/rain10d.png';
-import thunderstorm from '../icons/thunderstorm11d.png';
-import snow from '../icons/snow13d.png';
-import mist from '../icons/mist50d.png';
-import search from '../icons/search.png';
+import SearchBar from '../SearchBar/SearchBar';
+import clearSky from '../../icons/clearSky01d.png';
+import fewCloudsScatteredClouds from '../../icons/fewCloudsScatteredClouds02d.png';
+import overcastCloudsBrokenClouds from '../../icons/overcastCloudsBrokenClouds04d.png';
+import showerRain from '../../icons/showerRain09d.png';
+import rain from '../../icons/rain10d.png';
+import thunderstorm from '../../icons/thunderstorm11d.png';
+import snow from '../../icons/snow13d.png';
+import mist from '../../icons/mist50d.png';
 
-const Main = (isCelsius) => {
+const Main = ({ isCelsius }) => {
+  // Getting API response from redux store
   const { weatherFromAPI } = useSelector((state) => state.weather);
-  console.log(weatherFromAPI);
+
+  // Image Component
+
   const Image = () => {
     return (
       <>
@@ -63,31 +66,12 @@ const Main = (isCelsius) => {
 
   return (
     <>
-      <div className="searchBar">
-        <img src={search} alt="Search Icon" />
-        <input
-          type="text"
-          placeholder="search for places..."
-          //         value={searchText}
-          //         onChange={handleChange}
-          //         onSubmit={useEffect(() => {
-          //   dispatch(
-          //     loadWeather({
-          //       coord: {
-          //         lat: 50.4333,
-          //         lon: 30.5167,
-          //       },
-          //       unitTemp: 'metric',
-          //     })
-          //   );
-          // }, [dispatch])}
-        />
-      </div>
+      <SearchBar />
       <div className="mainImg">
         <Image />
       </div>
       <div className="mainText">
-        {isCelsius.isCelsius === 'metric' ? (
+        {isCelsius === 'metric' ? (
           <div className="tempText">
             <p>
               {Math.trunc(weatherFromAPI?.currentWeather.main.temp)}

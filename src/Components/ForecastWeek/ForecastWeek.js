@@ -10,8 +10,11 @@ import thunderstorm from '../icons/thunderstorm11d.png';
 import snow from '../icons/snow13d.png';
 import mist from '../icons/mist50d.png';
 
-const ForecastWeek = (isCelsius) => {
+const ForecastWeek = ({ isCelsius }) => {
+  // Getting API response from redux store
   const { weatherFromAPI } = useSelector((state) => state.weather);
+
+  // Rendering Divs
 
   let forecastDivs = weatherFromAPI?.forecastWeather.list.map((elem, index) => (
     <div key={index} className="forecastDiv">
@@ -42,7 +45,7 @@ const ForecastWeek = (isCelsius) => {
         )}
       </div>
       <div className="forecastTempText">
-        {isCelsius.isCelsius === 'metric' ? (
+        {isCelsius === 'metric' ? (
           <div>
             <p>{`${Math.round(elem.main.temp_min)}°`}</p>
             <p>{`${Math.round(elem.main.temp_max)}°`}</p>

@@ -24,11 +24,16 @@
 
 .searchBar img {
   position: absolute;
-  margin-left: 3px;
+  margin-left: 15px;
   top: 7px;
   left: 10px;
   width: 18px;
   height: 18px;
+}
+
+.searchBar button {
+  border: none;
+  cursor: pointer;
 }
 
 .mainImg img {

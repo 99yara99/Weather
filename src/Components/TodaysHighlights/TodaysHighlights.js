@@ -7,9 +7,11 @@ import humidity from '../icons/humidity.png';
 import tempMin from '../icons/tempMin.png';
 import tempMax from '../icons/tempMax.png';
 
-const TodaysHighlights = (isCelsius) => {
+const TodaysHighlights = ({ isCelsius }) => {
+  // Getting API response from redux store
   const { weatherFromAPI } = useSelector((state) => state.weather);
 
+  //Rendering Component
   return (
     <>
       <div className="uvIndex">
@@ -19,12 +21,12 @@ const TodaysHighlights = (isCelsius) => {
 
       <div className="windStatus">
         <span>Wind Status</span>
-        {isCelsius.isCelsius === 'metric' ? (
+        {isCelsius === 'metric' ? (
           <p>{`${weatherFromAPI?.currentWeather.wind.speed} m/s`}</p>
         ) : (
           <p>{`${(weatherFromAPI?.currentWeather.wind.speed * 2.2369).toFixed(
             2
-          )} km/h`}</p>
+          )} mph`}</p>
         )}
       </div>
 
@@ -66,7 +68,7 @@ const TodaysHighlights = (isCelsius) => {
 
         <div className="maxText">
           <img src={tempMax} alt="Cinque Terre" width={50} height={50} />
-          {isCelsius.isCelsius === 'metric' ? (
+          {isCelsius === 'metric' ? (
             <p>{`${Math.round(
               weatherFromAPI?.currentWeather.main.temp_max
             )}°`}</p>
@@ -80,13 +82,13 @@ const TodaysHighlights = (isCelsius) => {
 
         <div className="minText">
           <img src={tempMin} alt="Cinque Terre" width={50} height={50} />
-          {isCelsius.isCelsius === 'metric' ? (
-            <p>{`${Math.round(
+          {isCelsius === 'metric' ? (
+            <p>{`${Math.trunc(
               weatherFromAPI?.currentWeather.main.temp_min
             )}°`}</p>
           ) : (
             <p>{`${
-              Math.round(weatherFromAPI?.currentWeather.main.temp_min) * 1.8 +
+              Math.trunc(weatherFromAPI?.currentWeather.main.temp_min) * 1.8 +
               32
             }°`}</p>
           )}

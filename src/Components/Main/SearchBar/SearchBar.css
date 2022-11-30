@@ -1,0 +1,23 @@
+.modalWindow {
+  width: 30%;
+  height: 100%;
+  /* filter: blur(8px);
+  -webkit-filter: blur(8px); */
+}
+
+.citiesList button {
+  background-color: wheat;
+  border: none;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 35px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.citiesList button:first-child {
+  margin-top: 10px;
+}
+
+.citiesList button:hover {
+  font-size: 30px;
+}

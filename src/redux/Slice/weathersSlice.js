@@ -1,15 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-let initialState = {
-  weatherFromAPI: null,
-  isLoading: false,
-  errorMessage: null,
-};
-
 export let loadWeather = createAsyncThunk(
   'weather/loadWeather',
-  async ({ coord, unitTemp }, { rejectWithValue }) => {
+  async ({ coord }, { rejectWithValue }) => {
     const myAPIKey = 'c672f02723facd37006c42e83485322d';
 
     try {
@@ -20,7 +14,7 @@ export let loadWeather = createAsyncThunk(
             lat: coord.lat,
             lon: coord.lon,
             appid: myAPIKey,
-            units: unitTemp,
+            units: 'metric',
           },
         }
       );
@@ -32,7 +26,7 @@ export let loadWeather = createAsyncThunk(
             lat: coord.lat,
             lon: coord.lon,
             appid: myAPIKey,
-            units: unitTemp,
+            units: 'metric',
             cnt: 7,
           },
         }
@@ -58,7 +52,11 @@ export let loadWeather = createAsyncThunk(
 
 const weatherSlice = createSlice({
   name: 'weather',
-  initialState,
+  initialState: {
+    weatherFromAPI: null,
+    isLoading: false,
+    errorMessage: null,
+  },
   reducers: {},
   extraReducers: {
     [loadWeather.pending]: (state) => {
