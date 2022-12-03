@@ -31,10 +31,6 @@
   margin-top: 40px;
 }
 
-.tempIcon {
-  float: right;
-}
-
 .forecastTitle span {
   float: left;
   color: black;
@@ -42,24 +38,14 @@
   font-weight: bold;
 }
 
-.celsius {
-  display: inline-block;
-  background-color: black;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  margin-left: 10px;
-  padding: 6px 8px;
-  text-align: center;
-  font-size: 15px;
+.tempIcon {
+  float: right;
 }
 
-.celsius:focus {
+.tempBtn {
   display: inline-block;
-  background-color: white;
   border: none;
   border-radius: 50%;
-  color: black;
   margin-left: 10px;
   padding: 6px 8px;
   text-align: center;

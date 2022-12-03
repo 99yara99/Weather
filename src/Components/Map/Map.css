@@ -3,6 +3,7 @@
   width: 35%;
   height: 95%;
   float: left;
+  z-index: 0;
 }
 .leaflet-container {
   display: flex;

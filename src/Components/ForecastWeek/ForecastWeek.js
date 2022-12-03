@@ -16,51 +16,53 @@ const ForecastWeek = ({ isCelsius }) => {
 
   // Rendering Divs
 
-  let forecastDivs = weatherFromAPI?.forecastWeather.list.map((elem, index) => (
-    <div key={index} className="forecastDiv">
-      <p>{`${moment.unix(elem.dt).format('HH:mm')}`}</p>
-      <div className="imageIcon">
-        {['01d', '01n'].includes(elem.weather[0].icon) ? (
-          <img src={clearSky} alt="Clear Sky" />
-        ) : ['02d', '02n', '03d', '03n'].includes(elem.weather[0].icon) ? (
-          <img
-            src={fewCloudsScatteredClouds}
-            alt="Few Clouds or Scattered Clouds"
-          />
-        ) : ['04d', '04n'].includes(elem.weather[0].icon) ? (
-          <img
-            src={overcastCloudsBrokenClouds}
-            alt="Overcast Clouds or Broken Clouds"
-          />
-        ) : ['09d', '09n'].includes(elem.weather[0].icon) ? (
-          <img src={showerRain} alt="Shower Rain" />
-        ) : ['10d', '10n'].includes(elem.weather[0].icon) ? (
-          <img src={rain} alt="Rain" />
-        ) : ['13d', '13n'].includes(elem.weather[0].icon) ? (
-          <img src={snow} alt="Snow" />
-        ) : ['50d', '50n'].includes(elem.weather[0].icon) ? (
-          <img src={thunderstorm} alt="Thunderstorm" />
-        ) : (
-          <img src={mist} alt="Mist" />
-        )}
+  const forecastDivs = () => {
+    return weatherFromAPI?.forecastWeather.list.map((elem, index) => (
+      <div key={index} className="forecastDiv">
+        <p>{`${moment.unix(elem.dt).format('HH:mm')}`}</p>
+        <div className="imageIcon">
+          {['01d', '01n'].includes(elem.weather[0].icon) ? (
+            <img src={clearSky} alt="Clear Sky" />
+          ) : ['02d', '02n', '03d', '03n'].includes(elem.weather[0].icon) ? (
+            <img
+              src={fewCloudsScatteredClouds}
+              alt="Few Clouds or Scattered Clouds"
+            />
+          ) : ['04d', '04n'].includes(elem.weather[0].icon) ? (
+            <img
+              src={overcastCloudsBrokenClouds}
+              alt="Overcast Clouds or Broken Clouds"
+            />
+          ) : ['09d', '09n'].includes(elem.weather[0].icon) ? (
+            <img src={showerRain} alt="Shower Rain" />
+          ) : ['10d', '10n'].includes(elem.weather[0].icon) ? (
+            <img src={rain} alt="Rain" />
+          ) : ['13d', '13n'].includes(elem.weather[0].icon) ? (
+            <img src={snow} alt="Snow" />
+          ) : ['50d', '50n'].includes(elem.weather[0].icon) ? (
+            <img src={thunderstorm} alt="Thunderstorm" />
+          ) : (
+            <img src={mist} alt="Mist" />
+          )}
+        </div>
+        <div className="forecastTempText">
+          {isCelsius === 'metric' ? (
+            <div>
+              <p>{`${Math.round(elem.main.temp_min)}°`}</p>
+              <p>{`${Math.round(elem.main.temp_max)}°`}</p>
+            </div>
+          ) : (
+            <div>
+              <p>{`${Math.round(elem.main.temp_min * 1.8 + 32)}°`}</p>
+              <p>{`${Math.round(elem.main.temp_max * 1.8 + 32)}°`}</p>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="forecastTempText">
-        {isCelsius === 'metric' ? (
-          <div>
-            <p>{`${Math.round(elem.main.temp_min)}°`}</p>
-            <p>{`${Math.round(elem.main.temp_max)}°`}</p>
-          </div>
-        ) : (
-          <div>
-            <p>{`${Math.round(elem.main.temp_min * 1.8 + 32)}°`}</p>
-            <p>{`${Math.round(elem.main.temp_max * 1.8 + 32)}°`}</p>
-          </div>
-        )}
-      </div>
-    </div>
-  ));
+    ));
+  };
 
-  return <>{forecastDivs}</>;
+  return <>{forecastDivs()}</>;
 };
 
 export default ForecastWeek;

@@ -1,16 +1,43 @@
-.modalWindow {
-  width: 30%;
-  height: 100%;
-  /* filter: blur(8px);
-  -webkit-filter: blur(8px); */
+.searchBarInput {
+  width: 308px;
+  height: 28px;
+  background-color: #d2d4c8;
+  border-radius: 15px;
+  padding-left: 41px;
+  border: none;
+  font-size: 16px;
+}
+
+.searchBar {
+  position: relative;
+  margin-top: 40px;
+  margin-left: 35px;
+}
+
+.searchImg {
+  position: absolute;
+  margin-left: 4px;
+  top: 6px;
+  left: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.dropDown {
+  position: absolute;
+  width: 350px;
+  height: 455px;
+  border-radius: 15px;
+  margin-top: 25px;
+  background-color: #d2d4c8;
 }
 
 .citiesList button {
   background-color: wheat;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
-  margin-left: 35px;
+  margin-left: 12px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
@@ -19,5 +46,5 @@
 }
 
 .citiesList button:hover {
-  font-size: 30px;
+  font-size: 20px;
 }

@@ -77,14 +77,24 @@ function App() {
                 </div>
                 <div className="tempIcon">
                   <button
-                    className="celsius"
+                    style={{
+                      backgroundColor:
+                        isCelsius === 'metric' ? '#FFFFFF' : '#000000',
+                      color: isCelsius === 'metric' ? '#000000' : '#FFFFFF',
+                    }}
+                    className="tempBtn"
                     type="submit"
                     onClick={() => setIsCelsius('metric')}
                   >
                     °C
                   </button>
                   <button
-                    className="celsius"
+                    style={{
+                      backgroundColor:
+                        isCelsius === 'fahrenheit' ? '#FFFFFF' : '#000000',
+                      color: isCelsius === 'fahrenheit' ? '#000000' : '#FFFFFF',
+                    }}
+                    className="tempBtn"
                     type="button"
                     onClick={() => setIsCelsius('fahrenheit')}
                   >
