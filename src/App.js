@@ -7,17 +7,8 @@ import ForecastWeek from './Components/ForecastWeek/ForecastWeek';
 import MyMap from './Components/Map/Map';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { loadWeather } from './redux/Slice/weathersSlice';
+import { loadWeather } from './redux/Slice/WeatherSlice/weatherApiHandlers';
 import { CoordContext } from './Components/Main/SearchBar/CoordContext';
-
-// let coords = {
-//   lat: null,
-//   lon: null,
-// };
-// export const CoordContext = React.createContext({
-//   coords,
-//   getContext: () => {},
-// });
 
 function App() {
   // Context

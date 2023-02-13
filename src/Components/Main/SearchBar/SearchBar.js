@@ -4,14 +4,12 @@ import { useState, useContext, useCallback } from 'react';
 import search from '../../icons/search.png';
 import { useSelector, useDispatch } from 'react-redux';
 // import Modal from 'react-modal';
-import { loadCoord } from '../../../redux/Slice/searchSlice';
-import { loadWeather } from '../../../redux/Slice/weathersSlice';
+import { loadCoord } from '../../../redux/Slice/SearchSlice/searchApiHandlers';
+import { loadWeather } from '../../../redux/Slice/WeatherSlice/weatherApiHandlers';
 import { CoordContext } from './CoordContext';
+import { debounce } from '../../../utils/debounce';
 
 const SearchBar = () => {
-  // Modal State
-  // const [modalIsOpen, setIsOpen] = useState(false);
-
   // Getting data from Context
   let { coordsContext, setCoordsContext } = useContext(CoordContext);
 
@@ -19,35 +17,21 @@ const SearchBar = () => {
   const { coordFromAPI } = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
+
   const sendCoords = (index) => {
+    const coords = {
+      lat: coordFromAPI?.allCities[index].lat,
+      lon: coordFromAPI?.allCities[index].lon,
+    };
     dispatch(
       loadWeather({
-        coord: {
-          lat: coordFromAPI?.allCities[index].lat,
-          lon: coordFromAPI?.allCities[index].lon,
-        },
+        coord: coords,
       })
     );
-    setCoordsContext(
-      (coordsContext = {
-        lat: coordFromAPI?.allCities[index].lat,
-        lon: coordFromAPI?.allCities[index].lon,
-      })
-    );
+    setCoordsContext((coordsContext = coords));
   };
 
   // Debounce Search
-
-  const debounce = (func) => {
-    let timeout;
-    return (...args) => {
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        timeout = null;
-        func(...args);
-      }, 500);
-    };
-  };
 
   const [searchText, setSearchText] = useState('');
   const handleChange = (value) => {
